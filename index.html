@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Untuk Kamu ❤️</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #ffd6e7, #fff8fc);
+        overflow-x: hidden;
+      }
+
+      .hearts {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .heart {
+        position: absolute;
+        color: #ff8fb8;
+        opacity: 0.6;
+        animation: naik 8s linear infinite;
+      }
+
+      @keyframes naik {
+        from {
+          transform: translateY(100vh);
+        }
+        to {
+          transform: translateY(-120px);
+        }
+      }
+
+      .intro {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 15px;
+        animation: masuk 2s ease;
+      }
+
+      @keyframes masuk {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .photo-booth {
+        width: min(85vw, 350px);
+        background: white;
+        padding: 15px;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        animation: muncul 1.2s ease;
+      }
+
+      .photo-booth img {
+        width: 100%;
+        height: 200px;
+        display: block;
+        object-fit: cover;
+        border-radius: 15px;
+      }
+
+      .photo-line {
+        height: 2px;
+        margin: 15px 0;
+        background: linear-gradient(90deg, transparent, #ff9fc5, transparent);
+      }
+
+      @keyframes muncul {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .text-box {
+        text-align: center;
+        margin-top: 30px;
+        max-width: 700px;
+      }
+
+      .text-box h1 {
+        color: #ff4f8b;
+        font-size: clamp(25px, 5vw, 45px);
+      }
+
+      .text-box p {
+        color: #555;
+        margin-top: 15px;
+        font-size: clamp(14px, 2vw, 20px);
+      }
+
+      .letter-container {
+        position: fixed;
+        right: 25px;
+        bottom: -100px;
+        transition: 1s;
+      }
+
+      .letter-container.show {
+        bottom: 25px;
+      }
+
+      .letter {
+        width: 65px;
+        height: 45px;
+        position: relative;
+        cursor: pointer;
+        transition: 1s;
+      }
+
+      .letter.big {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(4);
+      }
+
+      .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ff78aa;
+        border-radius: 0 0 8px 8px;
+      }
+
+      .front {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ff9bc2;
+        clip-path: polygon(
+          0 0,
+          50% 60%,
+          100% 0
+        );
+        transform-origin: top;
+        transition: 0.8s;
+        z-index: 2;
+      }
+
+      .letter.open .front {
+        transform: rotateX(180deg);
+      }
+
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.5s;
+      }
+
+      .overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .paper {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0.5);
+        width: min(90vw, 700px);
+        max-height: 70vh;
+        overflow-y: auto;
+        padding: 30px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.8s;
+      }
+
+      .paper.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .paper h2 {
+        color: #ff4f8b;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .paper p {
+        color: #444;
+        line-height: 1.8;
+        white-space: pre-line;
+        word-wrap: break-word;
+      }
+
+      .paper::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .paper::-webkit-scrollbar-thumb {
+        background: #ff9fc5;
+        border-radius: 10px;
+      }
+
+      @media (max-width: 600px) {
+        .photo-booth img {
+          height: 160px;
+        }
+
+        .letter.big {
+          transform: translate(-50%, -50%) scale(3);
+        }
+
+        .paper {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="hearts"></div>
+
+    <div class="intro" id="intro">
+      <div class="photo-booth">
+        <img src="1.jpeg" alt="foto 1" />
+
+        <div class="photo-line"></div>
+
+        <img src="2.jpeg" alt="foto 2" />
+
+        <div class="photo-line"></div>
+
+        <img src="3.jpeg" alt="foto 3" />
+      </div>
+
+      <div class="text-box">
+        <h1 id="title"></h1>
+
+        <p id="subtitle"></p>
+      </div>
+    </div>
+
+    <div class="letter-container" id="letterContainer">
+      <div class="letter" id="letter">
+        <div class="back"></div>
+
+        <div class="front"></div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="paper" id="paper">
+      <h2>🎂 happy seventeenth birthday princess ❤️</h2>
+
+      <p id="message">
+        Selamat ulang tahun yaa, princesss ❤️✨
+
+        Di umur kamu yang ke-17 ini, aku berharap semoga semua doa, harapan, dan impian yang kamu punya bisa satu per satu terwujud 🤲✨ Semoga tahun ini menjadi tahun yang penuh kebahagiaan, keberuntungan, dan banyak hal baik yang datang ke hidup kamuu. Aamiin 🤍
+
+        Makasih banyak yaa, karena kamu udah hadir dan menjadi salah satu bagian terindah dalam hidupkuu ❤️ Makasih juga karena kamu sudah mewarnai hari-hariku yang sebelumnya terasa biasa aja, bahkan kadang terasa berat. Kehadiran kamu bener-bener punya arti yang besar buat akuu 🫶
+
+        Aku juga mau minta maaf kalau selama ini aku masih sering bikin kamu marah, kecewa, jengkel, atau ngerasa kurang nyaman 🙏 Maaf untuk semua sikap dan perkataanku yang mungkin pernah nyakitin kamuu. Aku masih belajar untuk jadi seseorang yang lebih baik, bukan cuma untuk diri aku sendiri, tapi juga untuk kamu 🤍
+
+        Di umur kamu yang baru ini, aku berharap kamu bisa menjadi wanita yang semakin kuat, dewasa, dan tangguh 💪✨ Aku tahu perjalanan kamu ke depannya mungkin nggak selalu mudah, tapi aku percaya kamu punya kemampuan untuk melewati semuanya. Aku selalu lihat gimana caranya kamu tetap berusaha, gimana caranya kamu tetap bertahan, dan aku yakin suatu hari nanti kamu bisa membuktikan kepada dunia kalau kamu mampu meraih semua yang kamu impikan ❤️‍🔥
+
+        Jangan pernah berhenti mengejar mimpi-mimpi kamu waktu kecil yaa 🌙 Tetap jadi kamu yang aku kenal, seseorang yang punya banyak hal indah di dalam dirinya 🤍
+
+        Aku juga berharap ke depannya kamu bisa semakin nyaman sama aku, semakin percaya sama aku, dan semoga kita bisa terus memperbaiki diri bersama 😄 Semoga hubungan ini bisa terus bertahan, tumbuh, dan menjadi lebih baik dari hari ke hari 🤗❤️
+
+        Sekali lagi, selamat ulang tahun yaa, princesss ❤️🎂
+
+        Terima kasih sudah hadir di hidup akuu 🫶 Semoga hari kamu seindah senyum kamu 😊 dan semoga semua hal baik selalu datang menghampiri kamu ✨
+
+        I’m always proud of you ❤️
+      </p>
+    </div>
+
+    <script>
+      const hearts = document.querySelector(".hearts");
+
+      for (let i = 0; i < 35; i++) {
+        let heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.innerHTML = "❤";
+
+        heart.style.left = Math.random() * 100 + "%";
+
+        heart.style.fontSize = 12 + Math.random() * 20 + "px";
+
+        heart.style.animationDuration = 5 + Math.random() * 8 + "s";
+
+        heart.style.animationDelay = Math.random() * 5 + "s";
+
+        hearts.appendChild(heart);
+      }
+
+      const titleText = "for the person I love most ❤️";
+
+      const subtitleText =
+        "Terima kasih sudah hadir dan menjadi bagian yang paling indah dalam hidupku";
+
+      let titleIndex = 0;
+
+      let subIndex = 0;
+
+      function typingTitle() {
+        if (titleIndex < titleText.length) {
+          document.getElementById("title").innerHTML += titleText[titleIndex];
+
+          titleIndex++;
+
+          setTimeout(typingTitle, 70);
+        } else {
+          typingSubtitle();
+        }
+      }
+
+      function typingSubtitle() {
+        if (subIndex < subtitleText.length) {
+          document.getElementById("subtitle").innerHTML +=
+            subtitleText[subIndex];
+
+          subIndex++;
+
+          setTimeout(typingSubtitle, 50);
+        }
+      }
+
+      setTimeout(typingTitle, 1500);
+
+      const letterContainer = document.getElementById("letterContainer");
+
+      setTimeout(() => {
+        letterContainer.classList.add("show");
+      }, 10000);
+
+      const letter = document.getElementById("letter");
+
+      const paper = document.getElementById("paper");
+
+      const overlay = document.getElementById("overlay");
+
+      letter.onclick = () => {
+        letter.classList.add("big");
+
+        setTimeout(() => {
+          letter.classList.add("open");
+        }, 700);
+
+        setTimeout(() => {
+          letterContainer.style.bottom = "-150px";
+
+          paper.classList.add("show");
+
+          overlay.classList.add("show");
+        }, 1500);
+      };
+
+      overlay.onclick = () => {
+        paper.classList.remove("show");
+
+        overlay.classList.remove("show");
+
+        setTimeout(() => {
+          letterContainer.style.bottom = "25px";
+
+          letter.classList.remove("open");
+        }, 700);
+
+        setTimeout(() => {
+          letter.classList.remove("big");
+        }, 1400);
+      };
+    </script>
+  </body>
+</html>
