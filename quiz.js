@@ -78,10 +78,10 @@ yesBtn.onclick = () => {
       console.log("Email gagal:", error);
     });
 
-  quizQuestion.innerHTML = "Terima kasih sudah mau menjadi pacarku ❤️🥹";
+  quizQuestion.innerHTML = "Thank You For Being My Girlfriend ❤️";
 
   quizText.innerHTML =
-    "Aku bakal berusaha menjadi seseorang yang lebih baik dan selalu menghargai kamu 🤍";
+    "Aku bakal terus berusaha menjadi seseorang yang lebih baik dan selalu menghargai kamu ❤️";
 
   document.querySelector(".quiz-buttons").style.display = "none";
 
