@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>For My Princesss ❤️</title>
 
     <style>
@@ -41,6 +42,7 @@
         from {
           transform: translateY(100vh);
         }
+
         to {
           transform: translateY(-120px);
         }
@@ -61,6 +63,7 @@
           opacity: 0;
           transform: scale(0.9);
         }
+
         to {
           opacity: 1;
           transform: scale(1);
@@ -79,8 +82,8 @@
       .photo-booth img {
         width: 100%;
         height: 200px;
-        display: block;
         object-fit: cover;
+        display: block;
         border-radius: 15px;
       }
 
@@ -95,6 +98,7 @@
           opacity: 0;
           transform: translateY(40px);
         }
+
         to {
           opacity: 1;
           transform: translateY(0);
@@ -135,6 +139,7 @@
         position: relative;
         cursor: pointer;
         transition: 1s;
+        filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.18));
       }
 
       .letter.big {
@@ -148,7 +153,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background: #ff78aa;
+        background: linear-gradient(145deg, #ff9ac2, #ff6fa5);
         border-radius: 0 0 8px 8px;
       }
 
@@ -156,12 +161,8 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background: #ff9bc2;
-        clip-path: polygon(
-          0 0,
-          50% 60%,
-          100% 0
-        );
+        background: linear-gradient(145deg, #ffc1d9, #ff8eb8);
+        clip-path: polygon(0 0, 50% 60%, 100% 0);
         transform-origin: top;
         transition: 0.8s;
         z-index: 2;
@@ -169,6 +170,23 @@
 
       .letter.open .front {
         transform: rotateX(180deg);
+      }
+
+      .seal {
+        position: absolute;
+        left: 50%;
+        top: 58%;
+        transform: translate(-50%, -50%);
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 5;
+        font-size: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       }
 
       .overlay {
@@ -194,7 +212,8 @@
         max-height: 70vh;
         overflow-y: auto;
         padding: 30px;
-        background: white;
+        background: linear-gradient(#fffdf8, #fff7ee);
+        border: 2px solid #ffd7a8;
         border-radius: 20px;
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
         opacity: 0;
@@ -208,6 +227,12 @@
         transform: translate(-50%, -50%) scale(1);
       }
 
+      .paper-decoration {
+        text-align: center;
+        font-size: 22px;
+        margin-bottom: 15px;
+      }
+
       .paper h2 {
         color: #ff4f8b;
         text-align: center;
@@ -219,6 +244,12 @@
         line-height: 1.8;
         white-space: pre-line;
         word-wrap: break-word;
+        padding: 10px;
+        background: repeating-linear-gradient(
+          transparent,
+          transparent 31px,
+          rgba(255, 150, 180, 0.12) 32px
+        );
       }
 
       .paper::-webkit-scrollbar {
@@ -247,19 +278,20 @@
   </head>
 
   <body>
+
     <div class="hearts"></div>
 
     <div class="intro" id="intro">
       <div class="photo-booth">
-        <img src="1.jpeg" alt="foto 1" />
+        <img src="1.jpeg" alt="Foto 1" />
 
         <div class="photo-line"></div>
 
-        <img src="2.jpeg" alt="foto 2" />
+        <img src="2.jpeg" alt="Foto 2" />
 
         <div class="photo-line"></div>
 
-        <img src="3.jpeg" alt="foto 3" />
+        <img src="3.jpeg" alt="Foto 3" />
       </div>
 
       <div class="text-box">
@@ -274,13 +306,17 @@
         <div class="back"></div>
 
         <div class="front"></div>
+
+        <div class="seal">❤️</div>
       </div>
     </div>
 
     <div class="overlay" id="overlay"></div>
 
     <div class="paper" id="paper">
-      <h2>🎂 happy seventeenth birthday princess ❤️</h2>
+      <div class="paper-decoration">🌸 ✨ 🌻 ✨ 🌸</div>
+
+      <h2>🎂 Happy Sweet Seventeen Princesss ❤️</h2>
 
       <p id="message">
         Selamat ulang tahun yaa, princesss ❤️✨
@@ -302,14 +338,15 @@
         Terima kasih sudah hadir di hidup akuu 🫶 Semoga hari kamu seindah senyum kamu 😊 dan semoga semua hal baik selalu datang menghampiri kamu ✨
 
         I’m always proud of you ❤️
-      </p>
+</p>
     </div>
 
     <script>
+
       const hearts = document.querySelector(".hearts");
 
       for (let i = 0; i < 35; i++) {
-        let heart = document.createElement("div");
+        const heart = document.createElement("div");
 
         heart.className = "heart";
 
@@ -326,39 +363,39 @@
         hearts.appendChild(heart);
       }
 
-      const titleText = "for the person I love most ❤️";
+      const titleText = "For The Person I Love Most ❤️";
 
       const subtitleText =
-        "Terima kasih sudah hadir dan menjadi bagian yang paling indah dalam hidupku";
+        "Terima kasih sudah hadir dan menjadi bagian paling indah dalam hidupku";
 
       let titleIndex = 0;
+      let subtitleIndex = 0;
 
-      let subIndex = 0;
-
-      function typingTitle() {
+      function typeTitle() {
         if (titleIndex < titleText.length) {
-          document.getElementById("title").innerHTML += titleText[titleIndex];
+          document.getElementById("title").innerHTML +=
+            titleText.charAt(titleIndex);
 
           titleIndex++;
 
-          setTimeout(typingTitle, 70);
+          setTimeout(typeTitle, 70);
         } else {
-          typingSubtitle();
+          typeSubtitle();
         }
       }
 
-      function typingSubtitle() {
-        if (subIndex < subtitleText.length) {
+      function typeSubtitle() {
+        if (subtitleIndex < subtitleText.length) {
           document.getElementById("subtitle").innerHTML +=
-            subtitleText[subIndex];
+            subtitleText.charAt(subtitleIndex);
 
-          subIndex++;
+          subtitleIndex++;
 
-          setTimeout(typingSubtitle, 50);
+          setTimeout(typeSubtitle, 45);
         }
       }
 
-      setTimeout(typingTitle, 1500);
+      setTimeout(typeTitle, 1200);
 
       const letterContainer = document.getElementById("letterContainer");
 
@@ -377,7 +414,7 @@
 
         setTimeout(() => {
           letter.classList.add("open");
-        }, 700);
+        }, 600);
 
         setTimeout(() => {
           letterContainer.style.bottom = "-150px";
@@ -385,7 +422,7 @@
           paper.classList.add("show");
 
           overlay.classList.add("show");
-        }, 1500);
+        }, 1400);
       };
 
       overlay.onclick = () => {
