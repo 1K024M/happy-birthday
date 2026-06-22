@@ -78,7 +78,7 @@ yesBtn.onclick = () => {
       console.log("Email gagal:", error);
     });
 
-  quizQuestion.innerHTML = "Thank You For Being My Girlfriend ❤️";
+  quizQuestion.innerHTML = "Thank You For Being My Girlfriend 🥰";
 
   quizText.innerHTML =
     "Aku bakal terus berusaha menjadi seseorang yang lebih baik dan selalu menghargai kamu ❤️";
