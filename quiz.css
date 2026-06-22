@@ -156,3 +156,15 @@ body {
     transform: translateY(-120px);
   }
 }
+
+#backBtn {
+  display: none;
+  margin-top: 25px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 30px;
+  background: #ffb6d2;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
