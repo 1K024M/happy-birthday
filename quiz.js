@@ -1,3 +1,7 @@
+emailjs.init("_wf9MMOHqD3Zdkk3s");
+
+// HATI TERBANG
+
 const hearts = document.querySelector(".hearts");
 
 for (let i = 0; i < 35; i++) {
@@ -28,6 +32,8 @@ const quizQuestion = document.getElementById("quizQuestion");
 
 const quizText = document.getElementById("quizText");
 
+const backBtn = document.getElementById("backBtn");
+
 let noCount = 0;
 
 // TOMBOL NO
@@ -53,10 +59,37 @@ noBtn.onclick = () => {
 // TOMBOL YES
 
 yesBtn.onclick = () => {
-  quizQuestion.innerHTML = "Thank you for being my girlfriend 🥰";
+  emailjs
+    .send(
+      "service_l7109kl",
+
+      "template_pk11hhx",
+
+      {
+        message: "YES ❤️ ditekan di website ultah",
+      },
+    )
+
+    .then(() => {
+      console.log("Email berhasil terkirim");
+    })
+
+    .catch((error) => {
+      console.log("Email gagal:", error);
+    });
+
+  quizQuestion.innerHTML = "Terima kasih sudah mau menjadi pacarku ❤️🥹";
 
   quizText.innerHTML =
-    "Aku bakal terus berusaha menjadi seseorang yang lebih baik dan selalu menghargai kamu ❤️";
+    "Aku bakal berusaha menjadi seseorang yang lebih baik dan selalu menghargai kamu 🤍";
 
   document.querySelector(".quiz-buttons").style.display = "none";
+
+  backBtn.style.display = "inline-block";
+};
+
+// TOMBOL KEMBALI
+
+backBtn.onclick = () => {
+  window.location.href = "index.html";
 };
